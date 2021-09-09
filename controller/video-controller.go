@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/caohieu04/Gin-Course/entity"
 	"github.com/caohieu04/Gin-Course/service"
 	"github.com/caohieu04/Gin-Course/validators"
@@ -11,6 +13,7 @@ import (
 type VideoController interface {
 	FindAll() []entity.Video
 	Save(ctx *gin.Context) error
+	ShowAll(ctx *gin.Context)
 }
 
 type controller struct {
@@ -42,4 +45,13 @@ func (c *controller) Save(ctx *gin.Context) error {
 	}
 	c.service.Save(video)
 	return nil
+}
+
+func (c *controller) ShowAll(ctx *gin.Context) {
+	videos := c.service.FindAll()
+	data := gin.H{
+		"title":  "Video Page",
+		"videos": videos,
+	}
+	ctx.HTML(http.StatusOK, "index.html", data)
 }
