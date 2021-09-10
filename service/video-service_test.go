@@ -29,7 +29,7 @@ func TestFindAll(t *testing.T) {
 	videos := service.FindAll()
 
 	firstVideo := videos[0]
-	assert.NotNil(t, videos)
+	assert.Nil(t, videos)
 	assert.Equal(t, TITLE, firstVideo.Title)
 	assert.Equal(t, DESCRIPTION, firstVideo.Description)
 	assert.Equal(t, URL, firstVideo.URL)
