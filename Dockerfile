@@ -20,4 +20,4 @@ RUN find . -name "*.go" -type f -delete
 
 EXPOSE $PORT
 
-CMD ["./Gin-Course"]
+CMD ["./gin-course"]
