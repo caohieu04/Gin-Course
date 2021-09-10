@@ -32,5 +32,5 @@ jobs:
       run: >
         sudo apt-get update -qy;
         sudo apt-get install -y ruby-dev;
-        gem install dpl;
+        sudo gem install dpl;
         dpl --provider=heroku --app=pragmatic-video-app --api-key=$HEROKU_API_KEY
