@@ -26,9 +26,16 @@ jobs:
       run: go test service/*.go
     - env:
         Staging : https://gin-course.herokuapp.com/
-    - name: Deploy
-      run: |
-        apt-get update -qy
-        apt-get install -y ruby-dev
-        gem install dpl
-        dpl --provider=heroku --app=pragmatic-video-app --api-key=$HEROKU_API_KEY
+
+    - name: Deploy 1
+      run: apt-get update -qy
+    - name: Deploy 2
+      run: apt-get install -y ruby-dev
+    - name: Deploy 3
+      run: gem install dpl
+    - name: Deploy 4
+      run: dpl --provider=heroku --app=pragmatic-video-app --api-key=$HEROKU_API_KEY
+        
+        
+        
+        
