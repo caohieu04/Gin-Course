@@ -28,7 +28,6 @@ jobs:
     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "gin-course" #Must be unique in Heroku
-        heroku_email: "caongochieu04@gmail.com"
+        heroku_app_name: gin-course #Must be unique in Heroku
+        heroku_email: caongochieu04@gmail.com
         usedocker: true
-        Staging : https://gin-course.herokuapp.com/
