@@ -24,8 +24,10 @@ jobs:
       run: go build -o bin/Gin-Course -v
     - name: Test
       run: go test service/*.go
+    - env:
+        Staging : https://gin-course.herokuapp.com/
     - name: Deploy
-      run: >
+      run: |
         apt-get update -qy
         apt-get install -y ruby-dev
         gem install dpl
