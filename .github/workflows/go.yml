@@ -25,12 +25,10 @@ jobs:
     - name: Test
       run: go test service/*.go
 
-        
-    - name: Deploy
-      env:
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "gin-course" #Must be unique in Heroku
+        heroku_email: "caongochieu04@gmail.com"
+        usedocker: true
         Staging : https://gin-course.herokuapp.com/
-      run: >
-        sudo apt-get update -qy;
-        sudo apt-get install -y ruby-dev;
-        sudo gem install dpl;
-        dpl --provider=heroku --app=pragmatic-video-app --api-key=$HEROKU_API_KEY
