@@ -56,6 +56,7 @@ func main() {
 	if port == "" {
 		port = "5000"
 	}
-	server.Run("127.0.0.1:" + port)
+	// server.Run("127.0.0.1:" + port)
+	server.Run(":" + port)
 	// server.Run(":8080")
 }
