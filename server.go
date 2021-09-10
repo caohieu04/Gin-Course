@@ -22,6 +22,7 @@ func setupLogOutput() {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 }
 func main() {
+	// gin.SetMode(gin.ReleaseMode)
 	setupLogOutput()
 
 	server := gin.New()
