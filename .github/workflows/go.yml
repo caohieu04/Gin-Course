@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [ ci-cd ]
+    branches: [ jwt ]
   pull_request:
-    branches: [ ci-cd ]
+    branches: [ jwt ]
 
 jobs:
 
