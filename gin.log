@@ -5,24 +5,15 @@
 [GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] Loaded HTML Templates (4): 
+	- 
 	- footer.html
 	- header.html
 	- index.html
-	- 
 
-[GIN-debug] GET    /api/videos               --> main.main.func1 (5 handlers)
-[GIN-debug] POST   /api/videos               --> main.main.func2 (5 handlers)
+[GIN-debug] POST   /login                    --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/videos               --> main.main.func2 (5 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func3 (5 handlers)
 [GIN-debug] GET    /view/videos              --> github.com/caohieu04/Gin-Course/controller.VideoController.ShowAll-fm (5 handlers)
-[GIN-debug] Listening and serving HTTP on 127.0.0.1:5000
-127.0.0.1 - [10 Sep 21 22:31 +07] GET / 404 2.4953ms 
-127.0.0.1 - [10 Sep 21 22:31 +07] GET /view 404 3.4993ms 
-127.0.0.1 - [10 Sep 21 22:31 +07] GET /view/videos 200 3.9932ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] POST /api/videos 200 6.0049ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] POST /api/videos 200 3.9921ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] POST /api/videos 200 4.5006ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] POST /api/videos 200 4.994ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] GET /view/videos 200 4.0194ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] GET /view/videos 401 501.1µs 
-127.0.0.1 - [10 Sep 21 22:32 +07] GET /view/videos 200 7.9997ms 
-127.0.0.1 - [10 Sep 21 22:32 +07] GET /favicon.ico 401 0s 
-127.0.0.1 - [10 Sep 21 22:32 +07] GET /favicon.ico 404 6.4955ms 
+[GIN-debug] Listening and serving HTTP on :5000
+::1 - [17 Sep 21 16:01 +07] GET /view/videos 200 5.4549ms 
+::1 - [17 Sep 21 16:01 +07] GET /view/videos 200 4.4571ms 

@@ -35,8 +35,11 @@ func main() {
 
 	server.LoadHTMLGlob("templates/*.html")
 
+	// server.Use(gin.Recovery(), middlewares.Logger(),
+	// 	middlewares.BasicAuth(), middlewares.AuthorizeJWT(), gindump.Dump())
+
 	server.Use(gin.Recovery(), middlewares.Logger(),
-		middlewares.BasicAuth(), gindump.Dump())
+		middlewares.AuthorizeJWT(), gindump.Dump())
 
 	server.POST("/login", func(ctx *gin.Context) {
 		token := loginController.Login(ctx)
