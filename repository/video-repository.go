@@ -14,7 +14,7 @@ type VideoRepository interface {
 }
 
 type database struct {
-	connection *gorm.DB
+	connection *gorm.D
 }
 
 func NewVideoRepository() VideoRepository {
