@@ -2,11 +2,11 @@ package main
 
 import (
 	"io"
-	"net/http"
 	"os"
 
+	"github.com/caohieu04/Gin-Course/api"
 	"github.com/caohieu04/Gin-Course/controller"
-	"github.com/caohieu04/Gin-Course/middlewares"
+	"github.com/caohieu04/Gin-Course/docs"
 	"github.com/caohieu04/Gin-Course/repository"
 	"github.com/caohieu04/Gin-Course/service"
 	"github.com/gin-gonic/gin"
@@ -43,53 +43,62 @@ func main() {
 
 	server.Use(gin.Recovery(), gin.Logger())
 
-	server.POST("/login", func(ctx *gin.Context) {
-		token := loginController.Login(ctx)
-		if token != "" {
-			ctx.JSON(http.StatusOK, gin.H{
-				"token": token,
-			})
-		} else {
-			ctx.JSON(http.StatusUnauthorized, nil)
+	videoAPI := api.NewVideoApi(loginController, videoController)
+	apiRoutes := server.Group(docs.SwaggerInfo.BasePath)
+	{
+		login := apiRoutes.Group("/auth")
+		{
+			login.POST("/token", videoAPI.Authenticate)
 		}
-	})
-
-	apiRoutes := server.Group("/api", middlewares.AuthorizeJWT())
-	{
-
-		apiRoutes.GET("/videos", func(ctx *gin.Context) {
-			ctx.JSON(200, videoController.FindAll())
-		})
-		apiRoutes.POST("/videos", func(ctx *gin.Context) {
-			err := videoController.Save(ctx)
-			if err != nil {
-				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			} else {
-				ctx.JSON(http.StatusOK, gin.H{"message": "Success!"})
-			}
-		})
-		apiRoutes.PUT("/videos/:id", func(ctx *gin.Context) {
-			err := videoController.Update(ctx)
-			if err != nil {
-				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			} else {
-				ctx.JSON(http.StatusOK, gin.H{"message": "PUT Success!"})
-			}
-		})
-		apiRoutes.DELETE("/videos/:id", func(ctx *gin.Context) {
-			err := videoController.Delete(ctx)
-			if err != nil {
-				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			} else {
-				ctx.JSON(http.StatusOK, gin.H{"message": "DELETE Success!"})
-			}
-		})
 	}
 
-	viewRoutes := server.Group("/view")
-	{
-		viewRoutes.GET("/videos", videoController.ShowAll)
-	}
+	// server.POST("/login", func(ctx *gin.Context) {
+	// 	token := loginController.Login(ctx)
+	// 	if token != "" {
+	// 		ctx.JSON(http.StatusOK, gin.H{
+	// 			"token": token,
+	// 		})
+	// 	} else {
+	// 		ctx.JSON(http.StatusUnauthorized, nil)
+	// 	}
+	// })
+
+	// apiRoutes := server.Group("/api", middlewares.AuthorizeJWT())
+	// {
+
+	// 	apiRoutes.GET("/videos", func(ctx *gin.Context) {
+	// 		ctx.JSON(200, videoController.FindAll())
+	// 	})
+	// 	apiRoutes.POST("/videos", func(ctx *gin.Context) {
+	// 		err := videoController.Save(ctx)
+	// 		if err != nil {
+	// 			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// 		} else {
+	// 			ctx.JSON(http.StatusOK, gin.H{"message": "Success!"})
+	// 		}
+	// 	})
+	// 	apiRoutes.PUT("/videos/:id", func(ctx *gin.Context) {
+	// 		err := videoController.Update(ctx)
+	// 		if err != nil {
+	// 			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// 		} else {
+	// 			ctx.JSON(http.StatusOK, gin.H{"message": "PUT Success!"})
+	// 		}
+	// 	})
+	// 	apiRoutes.DELETE("/videos/:id", func(ctx *gin.Context) {
+	// 		err := videoController.Delete(ctx)
+	// 		if err != nil {
+	// 			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// 		} else {
+	// 			ctx.JSON(http.StatusOK, gin.H{"message": "DELETE Success!"})
+	// 		}
+	// 	})
+	// }
+
+	// viewRoutes := server.Group("/view")
+	// {
+	// 	viewRoutes.GET("/videos", videoController.ShowAll)
+	// }
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "5000"
