@@ -10,7 +10,6 @@ import (
 	"github.com/caohieu04/Gin-Course/repository"
 	"github.com/caohieu04/Gin-Course/service"
 	"github.com/gin-gonic/gin"
-	gindump "github.com/tpkeeper/gin-dump"
 )
 
 var (
@@ -42,7 +41,7 @@ func main() {
 	// server.Use(gin.Recovery(), middlewares.Logger(),
 	// 	middlewares.BasicAuth(), middlewares.AuthorizeJWT(), gindump.Dump())
 
-	server.Use(gin.Recovery(), middlewares.Logger(), gindump.Dump())
+	server.Use(gin.Recovery(), gin.Logger())
 
 	server.POST("/login", func(ctx *gin.Context) {
 		token := loginController.Login(ctx)

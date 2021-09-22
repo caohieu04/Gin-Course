@@ -5,15 +5,24 @@
 [GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] Loaded HTML Templates (4): 
-	- index.html
 	- 
 	- footer.html
 	- header.html
+	- index.html
 
-[GIN-debug] POST   /login                    --> main.main.func1 (4 handlers)
-[GIN-debug] GET    /api/videos               --> main.main.func2 (5 handlers)
-[GIN-debug] POST   /api/videos               --> main.main.func3 (5 handlers)
-[GIN-debug] PUT    /api/videos/:id           --> main.main.func4 (5 handlers)
-[GIN-debug] DELETE /api/videos/:id           --> main.main.func5 (5 handlers)
-[GIN-debug] GET    /view/videos              --> github.com/caohieu04/Gin-Course/controller.VideoController.ShowAll-fm (4 handlers)
+[GIN-debug] POST   /login                    --> main.main.func1 (3 handlers)
+[GIN-debug] GET    /api/videos               --> main.main.func2 (4 handlers)
+[GIN-debug] POST   /api/videos               --> main.main.func3 (4 handlers)
+[GIN-debug] PUT    /api/videos/:id           --> main.main.func4 (4 handlers)
+[GIN-debug] DELETE /api/videos/:id           --> main.main.func5 (4 handlers)
+[GIN-debug] GET    /view/videos              --> github.com/caohieu04/Gin-Course/controller.VideoController.ShowAll-fm (3 handlers)
 [GIN-debug] Listening and serving HTTP on :5000
+[GIN] 2021/09/22 - 11:25:05 | 200 |       998.1µs |             ::1 | POST     "/login"
+[GIN] 2021/09/22 - 11:25:41 | 200 |      4.5002ms |             ::1 | POST     "/api/videos"
+[GIN] 2021/09/22 - 11:27:18 | 404 |            0s |             ::1 | POST     "/videos"
+[GIN] 2021/09/22 - 11:27:46 | 200 |       606.4µs |             ::1 | POST     "/login"
+[GIN] 2021/09/22 - 11:27:46 | 200 |      2.9998ms |             ::1 | POST     "/api/videos"
+[GIN] 2021/09/22 - 11:27:46 | 200 |      8.9991ms |             ::1 | POST     "/api/videos"
+[GIN] 2021/09/22 - 11:27:46 | 200 |      9.0286ms |             ::1 | POST     "/api/videos"
+[GIN] 2021/09/22 - 11:27:46 | 200 |      9.5381ms |             ::1 | POST     "/api/videos"
+[GIN] 2021/09/22 - 11:27:46 | 200 |      1.0358ms |             ::1 | GET      "/view/videos"

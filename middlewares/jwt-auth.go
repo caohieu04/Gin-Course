@@ -22,7 +22,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 			claims := token.Claims.(jwt.MapClaims)
 			convertTime := func(T interface{}) time.Time {
 				var tm time.Time
-				switch iat := claims["iat"].(type) {
+				switch iat := T.(type) {
 				case float64:
 					tm = time.Unix(int64(iat), 0)
 				}
