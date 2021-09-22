@@ -128,7 +128,7 @@ paths:
       - videos
       - create
   /videos/{id}:
-    put:
+    delete:
       consumes:
       - application/json
       description: Delete a single video
@@ -158,4 +158,45 @@ paths:
       summary: Delete videos
       tags:
       - videos
+    put:
+      consumes:
+      - application/json
+      description: Update a single video
+      parameters:
+      - description: Video ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update video
+        in: body
+        name: video
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Video'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.Response'
+      security:
+      - bearerAuth: []
+      summary: Update videos
+      tags:
+      - videos
+securityDefinitions:
+  bearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

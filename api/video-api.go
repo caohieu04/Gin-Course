@@ -8,13 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type VideoApi struct {
+type VideoAPI struct {
 	loginController controller.LoginController
 	videoController controller.VideoController
 }
 
-func NewVideoApi(loginController controller.LoginController, videoController controller.VideoController) *VideoApi {
-	return &VideoApi{
+func NewVideoAPI(loginController controller.LoginController, videoController controller.VideoController) *VideoAPI {
+	return &VideoAPI{
 		loginController: loginController,
 		videoController: videoController,
 	}
@@ -32,7 +32,7 @@ func NewVideoApi(loginController controller.LoginController, videoController con
 // @Success 200 {object} dto.JWT
 // @Failure 401 {object} dto.Response
 // @Router /auth/token [post]
-func (api *VideoApi) Authenticate(ctx *gin.Context) {
+func (api *VideoAPI) Authenticate(ctx *gin.Context) {
 	token := api.loginController.Login(ctx)
 	if token != "" {
 		ctx.JSON(http.StatusOK, &dto.JWT{
@@ -55,7 +55,7 @@ func (api *VideoApi) Authenticate(ctx *gin.Context) {
 // @Success 200 {array} entity.Video
 // @Failure 401 {object} dto.Response
 // @Router /videos [get]
-func (api *VideoApi) GetVideos(ctx *gin.Context) {
+func (api *VideoAPI) GetVideos(ctx *gin.Context) {
 	ctx.JSON(200, api.videoController.FindAll())
 }
 
@@ -71,7 +71,7 @@ func (api *VideoApi) GetVideos(ctx *gin.Context) {
 // @Failure 400 {object} dto.Response
 // @Failure 401 {object} dto.Response
 // @Router /videos [post]
-func (api *VideoApi) CreateVideo(ctx *gin.Context) {
+func (api *VideoAPI) CreateVideo(ctx *gin.Context) {
 	err := api.videoController.Save(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, &dto.Response{
@@ -97,7 +97,7 @@ func (api *VideoApi) CreateVideo(ctx *gin.Context) {
 // @Failure 400 {object} dto.Response
 // @Failure 401 {object} dto.Response
 // @Router /videos/{id} [put]
-func (api *VideoApi) UpdateVideo(ctx *gin.Context) {
+func (api *VideoAPI) UpdateVideo(ctx *gin.Context) {
 	err := api.videoController.Update(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, &dto.Response{
@@ -121,8 +121,8 @@ func (api *VideoApi) UpdateVideo(ctx *gin.Context) {
 // @Success 200 {object} dto.Response
 // @Failure 400 {object} dto.Response
 // @Failure 401 {object} dto.Response
-// @Router /videos/{id} [put]
-func (api *VideoApi) DeleteVideo(ctx *gin.Context) {
+// @Router /videos/{id} [delete]
+func (api *VideoAPI) DeleteVideo(ctx *gin.Context) {
 	err := api.videoController.Delete(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, &dto.Response{

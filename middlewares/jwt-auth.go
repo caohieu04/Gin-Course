@@ -1,8 +1,10 @@
 package middlewares
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/caohieu04/Gin-Course/service"
@@ -28,11 +30,13 @@ func AuthorizeJWT() gin.HandlerFunc {
 				}
 				return tm
 			}
-			log.Println("Claims[Name]: ", claims["name"])
-			log.Println("Claims[Admin]: ", claims["admin"])
-			log.Println("Claims[Issuer]: ", claims["iss"])
-			log.Println("Claims[IssuedAt]: ", convertTime(claims["iat"]))
-			log.Println("Claims[ExpiresAt]: ", convertTime(claims["exp"]))
+			f, _ := os.Open("token.log")
+			f.WriteString(fmt.Sprint("Claims[Name]: ", claims["name"]))
+			f.WriteString(fmt.Sprint("Claims[Admin]: ", claims["admin"]))
+			f.WriteString(fmt.Sprint("Claims[Issuer]: ", claims["iss"]))
+			f.WriteString(fmt.Sprint("Claims[IssuedAt]: ", convertTime(claims["iat"])))
+			f.WriteString(fmt.Sprint("Claims[ExpiresAt]: ", convertTime(claims["exp"])))
+			defer f.Close()
 		} else {
 			log.Println(err)
 			c.AbortWithStatus(http.StatusUnauthorized)
