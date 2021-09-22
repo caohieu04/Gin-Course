@@ -39,7 +39,7 @@ func main() {
 	docs.SwaggerInfo.Title = "Pragmatic Reviews - Video API"
 	docs.SwaggerInfo.Description = "Pragmatic Reviews - Youtube Video API."
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "pragmatic-video-app.herokuapp.com"
+	docs.SwaggerInfo.Host = "gin-course.herokuapp.com"
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"https"}
 

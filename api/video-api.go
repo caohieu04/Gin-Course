@@ -23,7 +23,7 @@ func NewVideoAPI(loginController controller.LoginController, videoController con
 // Paths Infomation
 // Authenticate godoc
 // @Summary Provides a JSON Web Token
-// @Description Authenticate a user and provides a JWT to Authorize API calls
+// @Description Authenticates a user and provides a JWT to Authorize API calls
 // @ID Authentication
 // @Consume application/x-www-form-urlencoded
 // @Produce json

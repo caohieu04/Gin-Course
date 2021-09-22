@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [ jwt ]
+    branches: [ swagger ]
   pull_request:
-    branches: [ jwt ]
+    branches: [ swagger ]
 
 jobs:
 

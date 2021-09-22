@@ -27,4 +27,4 @@ staging:
     name: Staging
     url: https://gin-course.herokuapp.com/
   only:
-    - ci-cd
+    - swagger
