@@ -7,15 +7,17 @@ import (
 
 	"github.com/caohieu04/Gin-Course/controller"
 	"github.com/caohieu04/Gin-Course/middlewares"
+	"github.com/caohieu04/Gin-Course/repository"
 	"github.com/caohieu04/Gin-Course/service"
 	"github.com/gin-gonic/gin"
 	gindump "github.com/tpkeeper/gin-dump"
 )
 
 var (
-	videoService service.VideoService = service.New()
-	loginService service.LoginService = service.NewLoginService()
-	jwtService   service.JWTService   = service.NewJWTService()
+	videoRepository repository.VideoRepository = repository.NewVideoRepository()
+	videoService    service.VideoService       = service.New(videoRepository)
+	loginService    service.LoginService       = service.NewLoginService()
+	jwtService      service.JWTService         = service.NewJWTService()
 
 	videoController controller.VideoController = controller.New(videoService)
 	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
@@ -25,8 +27,10 @@ func setupLogOutput() {
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 }
+
 func main() {
 	// gin.SetMode(gin.ReleaseMode)
+
 	setupLogOutput()
 
 	server := gin.New()
@@ -38,8 +42,7 @@ func main() {
 	// server.Use(gin.Recovery(), middlewares.Logger(),
 	// 	middlewares.BasicAuth(), middlewares.AuthorizeJWT(), gindump.Dump())
 
-	server.Use(gin.Recovery(), middlewares.Logger(),
-		middlewares.AuthorizeJWT(), gindump.Dump())
+	server.Use(gin.Recovery(), middlewares.Logger(), gindump.Dump())
 
 	server.POST("/login", func(ctx *gin.Context) {
 		token := loginController.Login(ctx)
@@ -52,7 +55,7 @@ func main() {
 		}
 	})
 
-	apiRoutes := server.Group("/api")
+	apiRoutes := server.Group("/api", middlewares.AuthorizeJWT())
 	{
 
 		apiRoutes.GET("/videos", func(ctx *gin.Context) {
@@ -63,7 +66,23 @@ func main() {
 			if err != nil {
 				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			} else {
-				ctx.JSON(http.StatusOK, gin.H{"message": "Video Input is Valid!!"})
+				ctx.JSON(http.StatusOK, gin.H{"message": "Success!"})
+			}
+		})
+		apiRoutes.PUT("/videos/:id", func(ctx *gin.Context) {
+			err := videoController.Update(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{"message": "PUT Success!"})
+			}
+		})
+		apiRoutes.DELETE("/videos/:id", func(ctx *gin.Context) {
+			err := videoController.Delete(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{"message": "DELETE Success!"})
 			}
 		})
 	}

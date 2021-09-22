@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/caohieu04/Gin-Course/entity"
+	"github.com/caohieu04/Gin-Course/repository"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,7 +23,8 @@ func getVideo() entity.Video {
 }
 
 func TestFindAll(t *testing.T) {
-	service := New()
+	videoRepository := repository.NewVideoRepository()
+	service := New(videoRepository)
 
 	service.Save(getVideo())
 
