@@ -10,6 +10,7 @@ import (
 	"github.com/caohieu04/Gin-Course/middlewares"
 	"github.com/caohieu04/Gin-Course/repository"
 	"github.com/caohieu04/Gin-Course/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -39,11 +40,12 @@ func main() {
 	docs.SwaggerInfo.Title = "Pragmatic Reviews - Video API"
 	docs.SwaggerInfo.Description = "Pragmatic Reviews - Youtube Video API."
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "gin-course.herokuapp.com"
+	docs.SwaggerInfo.Host = "localhost:5000"
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	docs.SwaggerInfo.Schemes = []string{"https"}
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	server := gin.Default()
+	server.Use(cors.Default())
 
 	videoAPI := api.NewVideoAPI(loginController, videoController)
 

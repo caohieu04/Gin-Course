@@ -38,7 +38,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 			f.WriteString(fmt.Sprint("Claims[ExpiresAt]: ", convertTime(claims["exp"])))
 			defer f.Close()
 		} else {
-			log.Println(err)
+			log.Println("jwt-auth", err)
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 	}
